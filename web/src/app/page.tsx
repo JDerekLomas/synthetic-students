@@ -1103,6 +1103,127 @@ export default function Home() {
                   />
                 </div>
 
+                {/* Compact Filter Bar */}
+                {selectedBank && (() => {
+                  const supabaseSource = supabaseSources.find(s => s.id === selectedBank.id);
+                  const difficulties = supabaseSource?.difficulties || [];
+                  const gradeLevels = supabaseSource?.gradeLevels || [];
+                  const topics = supabaseSource?.topics || [];
+
+                  if (difficulties.length === 0 && gradeLevels.length === 0 && topics.length === 0) return null;
+
+                  const gradeLevelLabels: Record<string, string> = {
+                    'grades-3-5': 'Gr 3-5',
+                    'grades-3-8': 'Gr 3-8',
+                    'grades-6-9': 'Gr 6-9',
+                    'college': 'College',
+                  };
+
+                  return (
+                    <div className="mb-3 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <div className="flex flex-wrap gap-2 items-center text-xs">
+                        {/* Grade Level Pills */}
+                        {gradeLevels.length > 0 && (
+                          <>
+                            <span className="text-gray-500 font-medium">Grade:</span>
+                            {gradeLevels.map(level => {
+                              const isSelected = selectedGradeLevels.has(level);
+                              return (
+                                <button
+                                  key={level}
+                                  onClick={() => {
+                                    const newSet = new Set(selectedGradeLevels);
+                                    if (isSelected) newSet.delete(level);
+                                    else newSet.add(level);
+                                    setSelectedGradeLevels(newSet);
+                                  }}
+                                  className={`px-2 py-0.5 rounded ${
+                                    isSelected
+                                      ? 'bg-blue-500 text-white'
+                                      : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100'
+                                  }`}
+                                >
+                                  {gradeLevelLabels[level] || level}
+                                </button>
+                              );
+                            })}
+                          </>
+                        )}
+
+                        {/* Difficulty Pills */}
+                        {difficulties.length > 0 && (
+                          <>
+                            <span className="text-gray-500 font-medium ml-2">Difficulty:</span>
+                            {difficulties.map(diff => {
+                              const isSelected = selectedDifficulties.has(diff);
+                              return (
+                                <button
+                                  key={diff}
+                                  onClick={() => {
+                                    const newSet = new Set(selectedDifficulties);
+                                    if (isSelected) newSet.delete(diff);
+                                    else newSet.add(diff);
+                                    setSelectedDifficulties(newSet);
+                                  }}
+                                  className={`px-2 py-0.5 rounded capitalize ${
+                                    isSelected
+                                      ? 'bg-blue-500 text-white'
+                                      : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100'
+                                  }`}
+                                >
+                                  {diff}
+                                </button>
+                              );
+                            })}
+                          </>
+                        )}
+
+                        {/* Topic Pills */}
+                        {topics.length > 0 && topics.length <= 5 && (
+                          <>
+                            <span className="text-gray-500 font-medium ml-2">Topic:</span>
+                            {topics.map(topic => {
+                              const isSelected = selectedTopics.has(topic);
+                              return (
+                                <button
+                                  key={topic}
+                                  onClick={() => {
+                                    const newSet = new Set(selectedTopics);
+                                    if (isSelected) newSet.delete(topic);
+                                    else newSet.add(topic);
+                                    setSelectedTopics(newSet);
+                                  }}
+                                  className={`px-2 py-0.5 rounded ${
+                                    isSelected
+                                      ? 'bg-blue-500 text-white'
+                                      : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100'
+                                  }`}
+                                >
+                                  {topic.replace(/-/g, ' ')}
+                                </button>
+                              );
+                            })}
+                          </>
+                        )}
+
+                        {/* Clear All */}
+                        {(selectedGradeLevels.size > 0 || selectedDifficulties.size > 0 || selectedTopics.size > 0) && (
+                          <button
+                            onClick={() => {
+                              setSelectedGradeLevels(new Set());
+                              setSelectedDifficulties(new Set());
+                              setSelectedTopics(new Set());
+                            }}
+                            className="ml-auto text-blue-600 hover:underline"
+                          >
+                            Clear filters
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()}
+
                 {/* Items List */}
                 <div className="space-y-2 max-h-96 overflow-y-auto">
                   {loadingItems ? (
