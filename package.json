@@ -1,0 +1,50 @@
+{
+  "name": "synthetic-students",
+  "version": "0.1.0",
+  "description": "AI-based item calibration using synthetic student personas",
+  "type": "module",
+  "bin": {
+    "synthetic-students": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "calibrate": "tsx src/index.ts calibrate",
+    "import": "tsx src/index.ts import",
+    "report": "tsx src/index.ts report"
+  },
+  "keywords": [
+    "psychometrics",
+    "item-response-theory",
+    "educational-assessment",
+    "llm",
+    "synthetic-data",
+    "test-calibration"
+  ],
+  "author": "Derek Lomas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JDerekLomas/synthetic-students"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "better-sqlite3": "^11.6.0",
+    "commander": "^12.1.0",
+    "csv-stringify": "^6.5.1",
+    "nanoid": "^5.0.9",
+    "ora": "^8.1.1",
+    "simple-statistics": "^7.8.7",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
