@@ -12,7 +12,11 @@
     "start": "node dist/index.js",
     "calibrate": "tsx src/index.ts calibrate",
     "import": "tsx src/index.ts import",
-    "report": "tsx src/index.ts report"
+    "report": "tsx src/index.ts report",
+    "import:sciq": "node scripts/import-sciq.js && npm run import -- -f data/raw/sciq_items.json -s sciq",
+    "import:arc": "node scripts/import-arc.js && npm run import -- -f data/raw/arc_items.json -s arc",
+    "import:mathqa": "node scripts/import-mathqa.js && npm run import -- -f data/raw/mathqa_items.json -s mathqa",
+    "import:race": "node scripts/import-race.js && npm run import -- -f data/raw/race_items.json -s race"
   },
   "keywords": [
     "psychometrics",
@@ -35,6 +39,7 @@
     "csv-stringify": "^6.5.1",
     "nanoid": "^5.0.9",
     "ora": "^8.1.1",
+    "parquetjs": "^0.11.2",
     "simple-statistics": "^7.8.7",
     "zod": "^3.23.8"
   },
