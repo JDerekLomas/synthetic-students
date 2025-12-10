@@ -16,7 +16,8 @@
     "import:sciq": "node scripts/import-sciq.js && npm run import -- -f data/raw/sciq_items.json -s sciq",
     "import:arc": "node scripts/import-arc.js && npm run import -- -f data/raw/arc_items.json -s arc",
     "import:mathqa": "node scripts/import-mathqa.js && npm run import -- -f data/raw/mathqa_items.json -s mathqa",
-    "import:race": "node scripts/import-race.js && npm run import -- -f data/raw/race_items.json -s race"
+    "import:race": "node scripts/import-race.js && npm run import -- -f data/raw/race_items.json -s race",
+    "import:mgkt": "node scripts/import-mgkt.js && npm run import -- -f data/raw/mgkt_items.json -s mgkt"
   },
   "keywords": [
     "psychometrics",

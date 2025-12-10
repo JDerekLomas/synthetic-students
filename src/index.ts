@@ -53,7 +53,7 @@ program
           id: item.id,
           source: options.source,
           topic: item.topic,
-          difficulty_label: item.difficulty,
+          difficulty_label: item.difficulty ?? item.difficulty_label,
           stem: item.stem,
           option_a: item.options?.A ?? item.option_a ?? '',
           option_b: item.options?.B ?? item.option_b ?? '',
@@ -62,6 +62,10 @@ program
           correct: item.correct,
           explanation: item.explanation ?? item.feedback?.explanation,
           code: item.code,
+          // Human psychometric statistics (if available)
+          human_difficulty: item.human_difficulty,
+          human_discrimination: item.human_discrimination,
+          n_human_responses: item.n_human_responses,
         });
         imported++;
       } catch (err) {

@@ -60,16 +60,21 @@ export class SyntheticStudentsDb {
     correct: string;
     explanation?: string;
     code?: string;
+    human_difficulty?: number;
+    human_discrimination?: number;
+    n_human_responses?: number;
   }): void {
     const stmt = this.db.prepare(`
       INSERT OR REPLACE INTO items (
         id, source, topic, difficulty_label, stem,
         option_a, option_b, option_c, option_d,
-        correct, explanation, code
+        correct, explanation, code,
+        human_difficulty, human_discrimination, n_human_responses
       ) VALUES (
         @id, @source, @topic, @difficulty_label, @stem,
         @option_a, @option_b, @option_c, @option_d,
-        @correct, @explanation, @code
+        @correct, @explanation, @code,
+        @human_difficulty, @human_discrimination, @n_human_responses
       )
     `);
     stmt.run(item);

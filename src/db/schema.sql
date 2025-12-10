@@ -15,6 +15,10 @@ CREATE TABLE IF NOT EXISTS items (
   correct TEXT NOT NULL,          -- A/B/C/D
   explanation TEXT,
   code TEXT,                      -- For programming questions
+  -- Human psychometric statistics (from datasets with response data)
+  human_difficulty REAL,          -- p-value from human responses (0-1)
+  human_discrimination REAL,      -- Point-biserial or D index (-1 to 1)
+  n_human_responses INTEGER,      -- Number of human responses used
   imported_at TEXT DEFAULT (datetime('now'))
 );
 
